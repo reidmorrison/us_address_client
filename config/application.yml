@@ -1,0 +1,15 @@
+#
+# Development
+#
+development:
+  us_address_client:
+    url:    http://localhost:8080/
+    mocked: false
+
+#
+# Test
+#
+test:
+  us_address_client:
+    url:    http://localhost:8080/
+    mocked: true
