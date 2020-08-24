@@ -1,4 +1,4 @@
-require 'date'
+require "date"
 
 module USAddressClient
   class Client
@@ -6,9 +6,9 @@ module USAddressClient
     # Once created a mutex is not used again since there is no writer accessor.
     sync_cattr_reader :http do
       OpinionatedHTTP.new(
-        header:               {'Content-Type' => 'application/json'},
-        secret_config_prefix: 'us_address_client',
-        metric_prefix:        'USAddressClient',
+        header:               {"Content-Type" => "application/json"},
+        secret_config_prefix: "us_address_client",
+        metric_prefix:        "USAddressClient",
         logger:               USAddressClient.logger,
         error_class:          ServiceError
       )

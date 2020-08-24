@@ -1,12 +1,12 @@
-require 'us_address_client/version'
-require 'opinionated_http'
-require 'secret_config'
+require "us_address_client/version"
+require "opinionated_http"
+require "secret_config"
 module USAddressClient
-  autoload :Address, 'us_address_client/address'
-  autoload :AddressMock, 'us_address_client/address_mock'
-  autoload :Client, 'us_address_client/client'
-  autoload :Parser, 'us_address_client/parser'
-  autoload :ServiceError, 'us_address_client/service_error'
+  autoload :Address, "us_address_client/address"
+  autoload :AddressMock, "us_address_client/address_mock"
+  autoload :Client, "us_address_client/client"
+  autoload :Parser, "us_address_client/parser"
+  autoload :ServiceError, "us_address_client/service_error"
 
   include SemanticLogger::Loggable
 
@@ -31,6 +31,6 @@ module USAddressClient
 
   # Returns whether to use mocked calls for address verification.
   def self.mocked?
-    SecretConfig.fetch('us_address_client/mocked', type: :boolean, default: false)
+    SecretConfig.fetch("us_address_client/mocked", type: :boolean, default: false)
   end
 end

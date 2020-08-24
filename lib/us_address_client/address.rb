@@ -1,22 +1,22 @@
 module USAddressClient
   class Address
     TIME_ZONES = {
-      '04' => 'Atlantic/Bermuda',
-      '05' => 'US/Eastern',
-      '06' => 'US/Central',
-      '07' => 'US/Mountain',
-      '08' => 'US/Pacific',
-      '09' => 'US/Alaska',
-      '10' => 'US/Hawaii',
-      '11' => 'US/Samoa',
-      '13' => 'Pacific/Majuro',
-      '14' => 'Pacific/Guam',
-      '15' => 'Pacific/Palau'
+      "04" => "Atlantic/Bermuda",
+      "05" => "US/Eastern",
+      "06" => "US/Central",
+      "07" => "US/Mountain",
+      "08" => "US/Pacific",
+      "09" => "US/Alaska",
+      "10" => "US/Hawaii",
+      "11" => "US/Samoa",
+      "13" => "Pacific/Majuro",
+      "14" => "Pacific/Guam",
+      "15" => "Pacific/Palau"
     }.freeze
 
     # See  http://wiki.melissadata.com/index.php?title=Result_Code_Details#Address_Object
-    GOOD_CODES = %w(AS01 AS02 AS03)
-    BAD_CODES  = %w(AC02 AC03)
+    GOOD_CODES = %w[AS01 AS02 AS03].freeze
+    BAD_CODES  = %w[AC02 AC03].freeze
 
     ATTRIBUTES = %i[
       address
@@ -45,7 +45,7 @@ module USAddressClient
       result_codes
     ].freeze
 
-    attr_accessor *ATTRIBUTES
+    attr_accessor(*ATTRIBUTES)
 
     def initialize(attributes = {}, safe = false)
       safe ? safe_assign_attributes(attributes) : self.attributes = attributes
@@ -60,7 +60,7 @@ module USAddressClient
       time_zone = TIME_ZONES[time_zone_code]
       return unless time_zone
 
-      time_zone = 'US/Arizona' if state == 'AZ'
+      time_zone = "US/Arizona" if state == "AZ"
       Time.now.in_time_zone(time_zone).utc_offset / -60
     end
 
