@@ -15,8 +15,21 @@ module USAddressClient
     }.freeze
 
     # See  http://wiki.melissadata.com/index.php?title=Result_Code_Details#Address_Object
-    GOOD_CODES = %w[AS01 AS02 AS03].freeze
-    BAD_CODES  = %w[AC02 AC03].freeze
+    def good_codes
+      @good_codes ||= SecretConfig.fetch(
+        "us_address_client/good_codes",
+        default:   %w[AS01 AS02 AS03],
+        separator: ","
+      ).freeze
+    end
+
+    def bad_codes
+      @bad_codes ||= SecretConfig.fetch(
+        "us_address_client/bad_codes",
+        default:   %w[AC02 AC03],
+        separator: ","
+      ).freeze
+    end
 
     ATTRIBUTES = %i[
       address
@@ -53,7 +66,7 @@ module USAddressClient
 
     # At least 1 good code and no bad codes
     def valid?
-      (result_codes & GOOD_CODES).present? && (result_codes & BAD_CODES).empty?
+      (result_codes & good_codes).present? && (result_codes & bad_codes).empty?
     end
 
     def time_zone_offset
