@@ -6,7 +6,6 @@ Gem::Specification.new do |s|
   s.name                  = "us_address_client"
   s.version               = USAddressClient::VERSION
   s.authors               = ["Reid Morrison"]
-  s.email                 = ["reidmo@gmail.com"]
   s.summary               = "US Address Service Client"
   s.homepage              = "https://github.com/reidmorrison/us_address_client"
   s.description           = "US Address Client that calls the privately hosted US Address Service that relies on Melissa Data Address Object"
