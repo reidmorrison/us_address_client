@@ -1,27 +1,16 @@
-require:
-  - rubocop-minitest
-  - rubocop-performance
-
 AllCops:
-  TargetRubyVersion: 2.4
   Exclude:
-    - '.git/**/*'
-    - '*.csv'
-    - '*.json'
-    - '*.yml'
-
-#
-# Performance
-#
-Performance:
-  Exclude:
-    - '**/test/**/*'
+    - ".git/**/*"
+    - "docs/**/*"
+  NewCops: enable
+  TargetRubyVersion: 2.5
 
 #
 # RuboCop built-in settings.
-#   For documentation on all settings see: https://docs.rubocop.org/rubocop/
+#   For documentation on all settings see: https://docs.rubocop.org/en/stable
 #
 
+# Trailing periods.
 Layout/DotPosition:
   EnforcedStyle: trailing
 
@@ -32,10 +21,6 @@ Layout/EndAlignment:
 # Prevent accidental windows line endings
 Layout/EndOfLine:
   EnforcedStyle: lf
-
-# Autocorrect equals sign alignment.
-Layout/ExtraSpacing:
-  ForceEqualSignAlignment: true
 
 # Use a table layout for hashes
 Layout/HashAlignment:
@@ -79,6 +64,6 @@ Style/SignalException:
 Style/SpecialGlobalVars:
   Enabled: false
 
-# Make it easier for developers to move between languages.
+# Make it easier for developers to move between Elixir and Ruby.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
