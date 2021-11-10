@@ -60,7 +60,7 @@ module USAddressClient
 
     attr_accessor(*ATTRIBUTES)
 
-    def initialize(attributes = {}, safe: false)
+    def initialize(attributes = {}, safe = false)
       safe ? safe_assign_attributes(attributes) : self.attributes = attributes
     end
 
