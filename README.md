@@ -97,7 +97,6 @@ us_address_client:
 
 #### Notes:
 
-- If `url` is not supplied then it will fall back to the local melissa data installation using the `melissa` gem. 
 - Configuration changes _must_ be made prior to any calls being made to this service.
 
 ### Logging
@@ -162,4 +161,33 @@ Output:
 2018-12-19 19:34:08.134662 T [28643:70323013957920 transport.rb:56] USAddressClient -- HTTP: Checkin connection HTTP:0.0.0.0:4000(70323063570580) self=connections=70323063570580 checked_out= with_map=
 2018-12-19 19:34:08.134716 D [28643:70323013957920 transport.rb:25] (16.6ms) USAddressClient -- #http_get -- { :path => "/address?address=2811+Safe+Harbor+Drive&city=Tampa&state=FL&zip=33618" }
 2018-12-19 19:34:08.134845 I [28643:70323013957920 client.rb:8] (16.8ms) USAddressClient -- #verify -- { :input => { :address => "2811 Safe Harbor Drive", :city => "Tampa", :state => "FL", :zip => "33618" }, :output => { :zip => "33618", :time_zone_code => "05", :time_zone => "Eastern Time", :suite_range => "", :suite_name => "", :suite => "", :suffix => "Dr", :street_name => "Safe Harbor", :state => "FL", :result_codes => [ "AS01" ], :private_mailbox_number => "", :private_mailbox_name => "", :pre_direction => "", :post_direction => "", :plus4 => "4534", :melissa_address_key_base => "", :melissa_address_key => "", :garbage => "", :delivery_point => "33618453411", :city => "Tampa", :address_type_code => "S", :address_type => "Street", :address_range => "2811", :address2 => "", :address => "2811 Safe Harbor Dr" } }
+~~~
+
+## Customizing what is a good or bad address
+
+Melissa Data returns good and bad codes after verifying the address. 
+
+By default the following codes need to be returned before the address is considered valid: 
+- AS01 
+- AS02 
+- AS03
+
+To override these codes, set the `good_codes` value in secret config as a list of comma separated values:
+
+~~~yaml
+us_address_client:
+  url:          http://address.service.test.com
+  good_codes:   "AS01, AS02, AS03, AS20"
+~~~
+
+Even if a good code is returned, by default the following codes will force the result to be considered invalid: 
+- AC02
+- AC03 
+
+To override these codes, set the `bad_codes` value in secret config as a list of comma separated values:
+
+~~~yaml
+us_address_client:
+  url:          http://address.service.test.com
+  bad_codes:    "AS03, AS09, AS16, AS17, AS24, AE01, AE02, AE03, AE04, AE05, AE07, AE10, AE11, AE12, AE13, AE14"
 ~~~

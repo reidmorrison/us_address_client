@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.license               = "Apache-2.0"
   s.required_ruby_version = ">= 2.5"
 
-  s.add_dependency "opinionated_http"
+  s.add_dependency "opinionated_http", "~> 0.1"
   s.add_dependency "secret_config"
   s.add_dependency "sync_attr"
 end

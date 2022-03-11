@@ -5,7 +5,6 @@ ENV["SECRET_CONFIG_PATH"] = "test"
 require "yaml"
 require "minitest/autorun"
 require "amazing_print"
-require "sync_attr"
 require "semantic_logger"
 require "us_address_client"
 

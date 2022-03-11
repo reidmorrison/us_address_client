@@ -1,4 +1,5 @@
 require "date"
+require "sync_attr"
 
 module USAddressClient
   class Client
@@ -6,7 +7,6 @@ module USAddressClient
     # Once created a mutex is not used again since there is no writer accessor.
     sync_cattr_reader :http do
       OpinionatedHTTP.new(
-        header:               {"Content-Type" => "application/json"},
         secret_config_prefix: "us_address_client",
         metric_prefix:        "USAddressClient",
         logger:               USAddressClient.logger,
@@ -17,8 +17,8 @@ module USAddressClient
     def self.verify(input_address)
       return AddressMock.new(input_address) if USAddressClient.mocked?
 
-      response = http.get(action: "address", parameters: input_address)
-      hash     = Parser.parse_verify_response(response)
+      response = http.get(action: "address", parameters: input_address, headers: {"Content-Type" => "application/json"})
+      hash     = Parser.parse_verify_response(response.body!)
       USAddressClient.logger.trace(payload: hash)
       Address.new(hash, true)
     end
@@ -32,8 +32,8 @@ module USAddressClient
         }
       end
 
-      response = http.get(action: "version")
-      Parser.parse_version_response(response)
+      response = http.get(action: "version", headers: {"Content-Type" => "application/json"})
+      Parser.parse_version_response(response.body!)
     end
   end
 end
